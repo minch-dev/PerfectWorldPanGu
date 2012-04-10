@@ -1,0 +1,183 @@
+<!DOCTYnE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style>
+html, body, div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+a, abbr, acronym, address, big, cite, code, 
+del, dfn, em, font, img, ins, kbd, q, s, samp, 
+small, strike, strong, sub, sup, tt, var, 
+dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td	{
+	margin:0; padding:0; border-spacing:0; border:0; outline:0; vertical-align:baseline;
+	font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit;
+}
+:focus	{	outline:0;	}
+body, html	{	line-height:1; color:black; background:white; height:100%; width:100%;	}
+ol, ul	{	list-style:none;	}
+table	{	border-collapse:separate; border-spacing:0;	}
+caption, th, td	{	text-align:left; font-weight:normal;	}
+blockquote:before, blockquote:after, q:before, q:after	{	content:"";	}
+blockquote, q	{	quotes:"" "";	}
+
+.obertka	{	display:table; padding:20px; margin:40px auto; background: #69F;	}
+.drevo 	{	display: table-cell; width:380px; 	}
+.drevo ul	{	 display:table-row; margin-left:20px; height:55px;	}
+.drevo li:first-child	{	font-size:24px;	}
+.drevo li	{	display:table-cell; width:35px; vertical-align:middle; text-align:center;	}
+.drevo input	{	width:30px; text-align:center;	}
+.drevo h1, .drevo h2	{	font-size:21px; margin-left:20px; font-weight:bold; color:#003; text-shadow: 1px 5px 30px #003;	}
+.podzagolovok	{	height:40px; line-height:40px; padding-left:35px;	}
+button,input	{	font-family:Arial, Helvetica, sans-serif; font-size:13px; background:#36C; color:white; font-weight:normal; text-decoration:none; border-radius:10px 6px 10px 6px; border:solid 2px #fff; border-bottom-color:#003; border-right-color:#003; padding:0px 7px;	}
+a	{	color:#fff;text-shadow:1px 1px 2px #003; 	}
+a:hover	{	text-shadow:1px 5px 10px #003;	}
+button:hover	{	text-shadow:1px 1px 0px #003; 	}
+button:active, a:active,input	{	position:relative; top:1px;border-color:#003; border-bottom-color:#fff; border-right-color:#fff;		}
+input	{	background:#fff; color:#003; position:static;	}
+body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; text-shadow: 1px 1px 20px #003;	}
+</style>
+<!--
+-->
+</head>
+<body>
+<div class="obertka">
+	<div class="drevo">
+		<h1>Полное древо</h1>
+		<div class="podzagolovok" id="nazvaniye"></div>
+		<div id="rawr"></div>
+	</div>
+	<div class="drevo">
+		<h2>Отдельные ветви</h2>
+		<div class="podzagolovok">
+			<input type="text" id="mnojitel" value="1">
+			<button onClick="drevo(vetka,'rawrRawr')">Умножить</button>
+		</div>
+		<div id="rawrRawr"></div>
+	</div>
+</div>
+<script>
+
+var vetka;
+var mnoj = 1;
+var mnojInput = document.getElementById('mnojitel');
+var nazvDiv = document.getElementById('nazvaniye');
+var schet;
+var str='';
+var i = new Array();
+var dann = new Array();
+				i[616] = new Array(516, 515, 514);
+			i[514] = new Array(408, 402, 404);
+			i[515] = new Array(406, 407, 401);
+			i[516] = new Array(406, 407, 401);
+		i[401] = new Array(303, 307, 304);
+		i[402] = new Array(304, 301, 305);
+		i[404] = new Array(306, 307, 301);
+		i[406] = new Array(308, 205, 207);
+		i[407] = new Array(309, 302, 306);
+		i[408] = new Array(301, 304, 302);
+	i[301] = new Array(201, 206, 203);
+	i[302] = new Array(202, 205, 206);
+	i[303] = new Array(207, 203, 202);
+	i[304] = new Array(204, 201, 203);
+	i[305] = new Array(205, 202, 201);
+	i[306] = new Array(206, 203, 201);
+	i[307] = new Array(207, 205, 204);
+	i[308] = new Array(208, 202, 204);
+	i[309] = new Array(209, 203, 202);
+i[201] = new Array(101, 104, 106);
+i[202] = new Array(102, 105, 106);
+i[203] = new Array(107, 103, 102);
+i[204] = new Array(101, 104, 103);
+i[205] = new Array(102, 105, 107);
+i[206] = new Array(106, 101, 103);
+i[207] = new Array(107, 103, 104);
+i[208] = new Array(108, 103, 101);
+i[209] = new Array(109, 103, 107);
+
+//http://www.pwdatabase.com/ru/items/
+					dann[616] = new Array('Бог Пань Гу',	'17683');
+				dann[514] = new Array('Прикосновение малиновых губ',	'17675');
+				dann[515] = new Array('Тринадцать хулиганов',	'17678');
+				dann[516] = new Array('Пустое зеркало',	'17682');
+			dann[401] = new Array('Буддистские чувства',	'17602');
+			dann[402] = new Array('Фатализм',	'17603');
+			dann[403] = new Array('Шипы роз',	'17604');
+			dann[404] = new Array('Беспорядки',	'17605');
+			dann[405] = new Array('Весенний ветер',	'17606');
+			dann[406] = new Array('Юг реки Янцзы',	'17610');
+			dann[407] = new Array('Воды слабости',	'17614');
+			dann[408] = new Array('Ветер тигров - облака драконов',	'17600');
+			dann[409] = new Array('Призыв духов',	'17601');
+		dann[301] = new Array('Наслаждайся жизнью, пока можно',	'17593');
+		dann[302] = new Array('Закат',	'17594');
+		dann[303] = new Array('Злодейство',	'17595');
+		dann[304] = new Array('Широкий путь',	'17596');
+		dann[305] = new Array('Аромат красавицы',	'17597');
+		dann[306] = new Array('Прощальная песнь',	'17598');
+		dann[307] = new Array('Хладнокровный человек',	'17599');
+		dann[308] = new Array('Поражение и распад',	'17609');
+		dann[309] = new Array('Зловоние',	'17613');
+	dann[201] = new Array('Поднимаем 1000 цзюнь',	'17586');
+	dann[202] = new Array('Туманный дождь цветов сливы',	'17587');
+	dann[203] = new Array('Красный лотос',	'17588');
+	dann[204] = new Array('Воин Чи Ю',	'17589');
+	dann[205] = new Array('Створки цветов персика',	'17590');
+	dann[206] = new Array('Под крепостью',	'17591');
+	dann[207] = new Array('Истинный огонь самадхи',	'17592');
+	dann[208] = new Array('Волк убийца',	'17608');
+	dann[209] = new Array('Купающийся в огне феникс',	'17612');
+dann[101] = new Array('Один против целой армии', '17579');
+dann[102] = new Array('Расцвели персиковые деревья',	'17580');
+dann[103] = new Array('Огонь действий',	'17581');
+dann[104] = new Array('Огромный дух',	'17582');
+dann[105] = new Array('Период разрушений',	'17583');
+dann[106] = new Array('Невозможное',	'17584');
+dann[107] = new Array('Смех с цветами в руках',	'17585');
+dann[108] = new Array('Красная река',	'17607');
+dann[109] = new Array('Луна огненных ночей',	'17611');
+
+
+function nazv(i_i){
+	txt = '<a href="http://www.pwdatabase.com/ru/items/'+dann[i_i][1]+'">'+dann[i_i][0]+'</a>';
+	nazvDiv.innerHTML = txt;
+}
+
+function st(iii){	str += '<ul><li>'+iii+'</li> ';	}
+function end(){	str += '</ul>';	}
+function display(iii){if(schet[iii]){
+//z = iii - (Math.round(iii/100)*100);
+	str +='<li><img src="'+iii+'.png" alt="'+schet[iii]+'" title="'+iii+'" onClick="mnojInput.value = this.alt*1; drevo(this.title*1,\'rawrRawr\');" onMouseOver="nazv(this.title*1);">×'+schet[iii]+'</li>';	
+}}
+function reDrevo(ii){
+	if(!schet[ii])schet[ii]=0; schet[ii]+=mnoj;
+	if(ii>200){	reDrevo(i[ii][0]); reDrevo(i[ii][1]); reDrevo(i[ii][2]);	}
+}
+
+function drevo(iiii,rrrr){
+	schet = new Array();
+	str='';
+	if(rrrr=='rawrRawr'){
+		vetka = iiii;
+		mnoj = mnojInput.value*1;
+	}
+	reDrevo(iiii);
+	st(6);	display(616);	end();
+	st(5);	display(514);display(515);display(516);	end();
+	st(4);	for(e = 401; e<=408; e++) if(e!==403 && e!==405) display(e);	end();
+	st(3);	for(e = 301; e<=309; e++) display(e);	end();
+	st(2);	for(e = 201; e<=209; e++) display(e);	end();
+	st(1);	for(e = 101; e<=109; e++) display(e);	end();
+	document.getElementById(rrrr).innerHTML = str;
+}
+
+
+drevo(616,'rawr');
+drevo(515,'rawrRawr');
+</script>
+
+
+</body>
+</html>
