@@ -23,22 +23,27 @@ caption, th, td	{	text-align:left; font-weight:normal;	}
 blockquote:before, blockquote:after, q:before, q:after	{	content:"";	}
 blockquote, q	{	quotes:"" "";	}
 
-img	{	 box-shadow: 0 0 20px rgba(0,0,0,0.5);	}
+
+
+
 .obertka	{	display:table; padding:20px; margin:40px auto; background:#69F; box-shadow: 0 0 20px rgba(0,0,0,0.5);border-radius:40px 250px 40px 40px;	}
 .drevo 	{	display: table-cell; width:380px; 	}
 .vetv	{	display:table;	}
+.vetv li button	{	display:block; margin:0px auto 2px; width:32px; height:32px; font-style:normal; background:none;  background-image:url(znachki.png); background-position:left top; box-shadow: 0px 0px 20px rgba(0,0,0,0.5); border:none; 	}
+.vetv li button:active	{	box-shadow:0px 0px 10px rgba(0,0,0,0.5);	}
+.vetv li b	{	margin-left:-6px;	}
 .drevo ul	{	 display:table-row; margin-left:20px; height:55px;	}
-.drevo li:first-child	{	font-size:24px;	}
+.drevo li:first-child	{	font-size:24px; text-align:left;	}
 .drevo li	{	display:table-cell; width:35px; vertical-align:middle; text-align:center;	}
 .drevo h1, .drevo h2	{	font-size:21px; margin-left:20px; font-weight:bold; color:#003; text-shadow: 1px 5px 30px #003;	}
 .podzagolovok	{	height:40px; line-height:40px; padding-left:35px;	}
 .drevo input	{	width:16px; text-align:center;	}
-button,input	{	line-height:18px;font-family:Arial, Helvetica, sans-serif; font-size:13px; background:#36C; color:white; font-weight:normal; text-decoration:none; border-radius:10px 6px 10px 6px; border:solid 2px #fff; border-bottom-color:#003; border-right-color:#003; padding:0px 7px;	}
+.podzagolovok button, .podzagolovok input	{	line-height:18px;font-family:Arial, Helvetica, sans-serif; font-size:13px; background:#36C; color:white; font-weight:normal; text-decoration:none; border-radius:10px 6px 10px 6px; border:solid 2px #fff; border-bottom-color:#003; border-right-color:#003; padding:0px 7px;	}
 a	{	color:#fff;text-shadow:1px 1px 2px #003; 	}
 a:hover	{	text-shadow:1px 5px 10px #003;	}
-button:hover	{	text-shadow:1px 1px 0px #003; 	}
-button:active, a:active,input	{	border-color:#003; border-bottom-color:#fff; border-right-color:#fff;		}
-input	{	background:#fff; color:#003; position:static;	}
+.podzagolovok button:hover	{	text-shadow:1px 1px 0px #003; 	}
+.podzagolovok button:active, a:active,.podzagolovok input	{	border-color:#003; border-bottom-color:#fff; border-right-color:#fff;		}
+.podzagolovok input	{	background:#fff; color:#003; position:static;	}
 body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; text-shadow: 1px 1px 20px #003;	}
 </style>
 <!--
@@ -57,7 +62,7 @@ body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; te
 			<input type="text" id="mnojitel" value="1">
 			<button onClick="drevo(vetka,'rawrRawr')">Количество</button>
 		</div>
-		<div id="rawrRawr" class="vetv"></div>
+		<div  id="rawrRawr" class="vetv"></div>
 	</div>
 </div>
 <script>
@@ -142,16 +147,25 @@ dann[108] = new Array('Красная река',	'17607');
 dann[109] = new Array('Луна огненных ночей',	'17611');
 
 
-function nazv(i_i){
-	txt = '<a href="http://www.pwdatabase.com/ru/items/'+dann[i_i][1]+'" target="_blank">'+dann[i_i][0]+'</a>';
+function nazv(t){
+	iii = t.title*1;
+	txt = '<a href="http://www.pwdatabase.com/ru/items/'+dann[iii][1]+'" target="_blank">'+dann[iii][0]+'</a>';
 	nazvDiv.innerHTML = txt;
 }
-
+function shelk(t){
+	mnojInput.value = t.value*1;
+	drevo(t.title*1,'rawrRawr');
+}
+function sdvig(iii){
+	ryad = Math.round(iii/100);
+	num = iii - (ryad*100);
+	return(' background-position:-'+(32*(num-1))+'px -'+(32*(ryad-1))+'px');
+}
 function st(iii){	str += '<ul><li>'+iii+'</li> ';	}
 function end(){	str += '</ul>';	}
 function display(iii){if(schet[iii]){
-//z = iii - (Math.round(iii/100)*100);
-	str +='<li><img src="http://www.pwdatabase.com/images/icons/generalm/'+dann[iii][1]+'.gif" alt="'+schet[iii]+'" title="'+iii+'" onClick="mnojInput.value = this.alt*1; drevo(this.title*1,\'rawrRawr\');" onMouseOver="nazv(this.title*1);">×'+schet[iii]+'</li>';	
+//z = iii - (Math.round(iii/100)*100);'+0+'px'+32+'px;
+	str +='<li><button style="'+sdvig(iii)+'" value="'+schet[iii]+'" title="'+iii+'" onClick="shelk(this)" onMouseOver="nazv(this);"></button><b>×'+schet[iii]+'</b></li>';
 }}
 function reDrevo(ii){
 	if(!schet[ii])schet[ii]=0; schet[ii]+=mnoj;
