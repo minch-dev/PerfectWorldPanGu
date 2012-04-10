@@ -1,16 +1,16 @@
-<!DOCTYnE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>Расчёт глав 1-го уровня, которые нужны для глав 2-го уровня, которые нужны для глав 3-го уровня, которые нужны для глав 4-го уровня, которые нужны для глав 5-го уровня, которые нужны... для для ОДНОЙ захудалой книжки 6-го уровня, дающей +6-7 к основным показателям =_____=</title>
 <style>
-html, body, div, span, applet, object, iframe, 
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
-a, abbr, acronym, address, big, cite, code, 
-del, dfn, em, font, img, ins, kbd, q, s, samp, 
-small, strike, strong, sub, sup, tt, var, 
-dl, dt, dd, ol, ul, li, 
-fieldset, form, label, legend, 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td	{
 	margin:0; padding:0; border-spacing:0; border:0; outline:0; vertical-align:baseline;
 	font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit;
@@ -23,19 +23,21 @@ caption, th, td	{	text-align:left; font-weight:normal;	}
 blockquote:before, blockquote:after, q:before, q:after	{	content:"";	}
 blockquote, q	{	quotes:"" "";	}
 
-.obertka	{	display:table; padding:20px; margin:40px auto; background: #69F;	}
+img	{	 box-shadow: 0 0 20px rgba(0,0,0,0.5);	}
+.obertka	{	display:table; padding:20px; margin:40px auto; background:#69F; box-shadow: 0 0 20px rgba(0,0,0,0.5);border-radius:40px 250px 40px 40px;	}
 .drevo 	{	display: table-cell; width:380px; 	}
+.vetv	{	display:table;	}
 .drevo ul	{	 display:table-row; margin-left:20px; height:55px;	}
 .drevo li:first-child	{	font-size:24px;	}
 .drevo li	{	display:table-cell; width:35px; vertical-align:middle; text-align:center;	}
-.drevo input	{	width:30px; text-align:center;	}
 .drevo h1, .drevo h2	{	font-size:21px; margin-left:20px; font-weight:bold; color:#003; text-shadow: 1px 5px 30px #003;	}
 .podzagolovok	{	height:40px; line-height:40px; padding-left:35px;	}
-button,input	{	font-family:Arial, Helvetica, sans-serif; font-size:13px; background:#36C; color:white; font-weight:normal; text-decoration:none; border-radius:10px 6px 10px 6px; border:solid 2px #fff; border-bottom-color:#003; border-right-color:#003; padding:0px 7px;	}
+.drevo input	{	width:16px; text-align:center;	}
+button,input	{	line-height:18px;font-family:Arial, Helvetica, sans-serif; font-size:13px; background:#36C; color:white; font-weight:normal; text-decoration:none; border-radius:10px 6px 10px 6px; border:solid 2px #fff; border-bottom-color:#003; border-right-color:#003; padding:0px 7px;	}
 a	{	color:#fff;text-shadow:1px 1px 2px #003; 	}
 a:hover	{	text-shadow:1px 5px 10px #003;	}
 button:hover	{	text-shadow:1px 1px 0px #003; 	}
-button:active, a:active,input	{	position:relative; top:1px;border-color:#003; border-bottom-color:#fff; border-right-color:#fff;		}
+button:active, a:active,input	{	border-color:#003; border-bottom-color:#fff; border-right-color:#fff;		}
 input	{	background:#fff; color:#003; position:static;	}
 body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; text-shadow: 1px 1px 20px #003;	}
 </style>
@@ -46,16 +48,16 @@ body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; te
 <div class="obertka">
 	<div class="drevo">
 		<h1>Полное древо</h1>
-		<div class="podzagolovok" id="nazvaniye"></div>
-		<div id="rawr"></div>
+		<div class="podzagolovok" id="nazvaniye">&nbsp;</div>
+		<div id="rawr" class="vetv"></div>
 	</div>
 	<div class="drevo">
 		<h2>Отдельные ветви</h2>
 		<div class="podzagolovok">
 			<input type="text" id="mnojitel" value="1">
-			<button onClick="drevo(vetka,'rawrRawr')">Умножить</button>
+			<button onClick="drevo(vetka,'rawrRawr')">Количество</button>
 		</div>
-		<div id="rawrRawr"></div>
+		<div id="rawrRawr" class="vetv"></div>
 	</div>
 </div>
 <script>
@@ -141,7 +143,7 @@ dann[109] = new Array('Луна огненных ночей',	'17611');
 
 
 function nazv(i_i){
-	txt = '<a href="http://www.pwdatabase.com/ru/items/'+dann[i_i][1]+'">'+dann[i_i][0]+'</a>';
+	txt = '<a href="http://www.pwdatabase.com/ru/items/'+dann[i_i][1]+'" target="_blank">'+dann[i_i][0]+'</a>';
 	nazvDiv.innerHTML = txt;
 }
 
