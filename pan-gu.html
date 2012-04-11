@@ -25,13 +25,18 @@ blockquote, q	{	quotes:"" "";	}
 
 
 
+body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; text-shadow: 1px 1px 20px #003;	}
+a	{	color:#fff;text-shadow:1px 1px 2px #003; 	}
+a:hover	{	text-shadow:1px 5px 10px #003;	}
 
-.obertka	{	display:table; padding:20px; margin:40px auto; background:#69F; box-shadow: 0 0 20px rgba(0,0,0,0.5);border-radius:40px 250px 40px 40px;	}
+.obertka	{	display:table; padding:20px; margin:40px auto 10px; background:#69F; box-shadow: 0 0 20px rgba(0,0,0,0.5);border-radius:40px 250px 40px 40px;	}
 .drevo 	{	display: table-cell; width:380px; 	}
 .vetv	{	display:table;	}
 .vetv li button	{	display:block; margin:0px auto 2px; width:32px; height:32px; font-style:normal; background:none;  background-image:url(znachki.png); background-position:left top; box-shadow: 0px 0px 20px rgba(0,0,0,0.5); border:none; 	}
 .vetv li button:active	{	box-shadow:0px 0px 10px rgba(0,0,0,0.5);	}
 .vetv li b	{	margin-left:-6px;	}
+.vetv li span	{	display:block; height:10px; margin-top:-10px; font-size:7px; overflow:hidden; font-weight:normal; font-family:Arial, Helvetica, sans-serif; visibility:hidden; cursor:pointer;	} 
+.vetv li:hover span	{	visibility:visible;	}
 .drevo ul	{	 display:table-row; margin-left:20px; height:55px;	}
 .drevo li:first-child	{	font-size:24px; text-align:left;	}
 .drevo li	{	display:table-cell; width:35px; vertical-align:middle; text-align:center;	}
@@ -39,12 +44,14 @@ blockquote, q	{	quotes:"" "";	}
 .podzagolovok	{	height:40px; line-height:40px; padding-left:35px;	}
 .drevo input	{	width:16px; text-align:center;	}
 .podzagolovok button, .podzagolovok input	{	line-height:18px;font-family:Arial, Helvetica, sans-serif; font-size:13px; background:#36C; color:white; font-weight:normal; text-decoration:none; border-radius:10px 6px 10px 6px; border:solid 2px #fff; border-bottom-color:#003; border-right-color:#003; padding:0px 7px;	}
-a	{	color:#fff;text-shadow:1px 1px 2px #003; 	}
-a:hover	{	text-shadow:1px 5px 10px #003;	}
 .podzagolovok button:hover	{	text-shadow:1px 1px 0px #003; 	}
-.podzagolovok button:active, a:active,.podzagolovok input	{	border-color:#003; border-bottom-color:#fff; border-right-color:#fff;		}
+.podzagolovok button:active, a:active,.podzagolovok input	{	border-color:#003; border-bottom-color:#fff; border-right-color:#fff;	}
 .podzagolovok input	{	background:#fff; color:#003; position:static;	}
-body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; text-shadow: 1px 1px 20px #003;	}
+
+#vychet	{	width:800px; margin:0px auto; visibility:hidden;	}
+#vychet ul	{	display:inline-block;	}
+#vychet>div	{	width:100%;	}
+
 </style>
 <!--
 -->
@@ -60,21 +67,33 @@ body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; te
 		<h2>Отдельные ветви</h2>
 		<div class="podzagolovok">
 			<input type="text" id="mnojitel" value="1">
-			<button onClick="drevo(vetka,'rawrRawr')">Количество</button>
+			<button onClick="drevo(vetka,true)">Количество</button>
 		</div>
 		<div  id="rawrRawr" class="vetv"></div>
+	</div>
+</div>
+<div id="vychet">
+	<div class="drevo">
+		<h2>Уже имеющиеся главы</h2>
+		<div class="podzagolovok" id="nazvaniye">Вычитаются вместе с зависимостями.</div>
+		<div id="rawrRawrRawr" class="vetv"></div>
 	</div>
 </div>
 <script>
 
 var vetka;
+var rawr;
 var mnoj = 1;
 var mnojInput = document.getElementById('mnojitel');
 var nazvDiv = document.getElementById('nazvaniye');
+var vychetDiv = document.getElementById('rawrRawrRawr');
+var scryt = document.getElementById('vychet').style;
 var schet;
 var str='';
-var i = new Array();
-var dann = new Array();
+var i = [];
+var dann = [];
+var vychet = [];
+var vychetCopy = [];
 				i[616] = new Array(516, 515, 514);
 			i[514] = new Array(408, 402, 404);
 			i[515] = new Array(406, 407, 401);
@@ -153,45 +172,94 @@ function nazv(t){
 	nazvDiv.innerHTML = txt;
 }
 function shelk(t){
+	
 	mnojInput.value = t.value*1;
-	drevo(t.title*1,'rawrRawr');
+	drevo(t.title*1,true);
+}
+function zachest(e,sw){
+	if(!sw) vychet[e] = 0;
+	drevo(616);
+	if(e == vetka) mnojInput.value = schet[e];
+	drevo(vetka,true);
+	vychtennoe();
+	scryt.visibility = 'visible';
+	
+}
+function okno(e,t){
+	butt = t.parentNode.getElementsByTagName('button')[0].value;
+	uje=prompt('Сколько?',butt)*1;
+	if(uje){
+		if(!vychet[e])vychet[e]=0;
+		vychet[e] += uje;
+		zachest(e,true);
+	}
+
+	
+}
+
+function vychtennoe(){
+	txt = '';
+	for(r=1;r<=6;r++){
+		lis = '';
+		nach = r*100+1;
+		konec = r*100+16;
+		for(e = nach; e<=konec; e++){
+			if(vychet[e]){
+				lis +='<li><span onClick="zachest('+e+');">обратно</span><button style="'+sdvig(e)+'" value="'+vychet[e]+'" title="'+e+'" onClick="shelk(this)" onMouseOver="nazv(this);"></button><b>×'+vychet[e]+'</b></li>';
+			}
+		}
+		if(lis!='') txt += '<ul><li>'+r+'</li> '+lis+'</ul>';
+	}
+	vychetDiv.innerHTML = txt;
 }
 function sdvig(iii){
 	ryad = Math.round(iii/100);
 	num = iii - (ryad*100);
 	return(' background-position:-'+(32*(num-1))+'px -'+(32*(ryad-1))+'px');
 }
-function st(iii){	str += '<ul><li>'+iii+'</li> ';	}
-function end(){	str += '</ul>';	}
-function display(iii){if(schet[iii]){
-//z = iii - (Math.round(iii/100)*100);'+0+'px'+32+'px;
-	str +='<li><button style="'+sdvig(iii)+'" value="'+schet[iii]+'" title="'+iii+'" onClick="shelk(this)" onMouseOver="nazv(this);"></button><b>×'+schet[iii]+'</b></li>';
-}}
-function reDrevo(ii){
-	if(!schet[ii])schet[ii]=0; schet[ii]+=mnoj;
-	if(ii>200){	reDrevo(i[ii][0]); reDrevo(i[ii][1]); reDrevo(i[ii][2]);	}
-}
 
-function drevo(iiii,rrrr){
-	schet = new Array();
-	str='';
-	if(rrrr=='rawrRawr'){
-		vetka = iiii;
-		mnoj = mnojInput.value*1;
+function w(){
+	txt = '';
+	for(r=6;r>=1;r--){
+		nach = r*100+1;
+		konec = r*100+16;
+		txt += '<ul><li>'+r+'</li> ';
+		for(e = nach; e<=konec; e++){
+			if(schet[e]){
+				txt +='<li><span onClick="okno('+e+',this);">вычесть</span><button style="'+sdvig(e)+'" value="'+schet[e]+'" title="'+e+'" onClick="shelk(this)" onMouseOver="nazv(this);"></button><b>×'+schet[e]+'</b></li>';
+			}
+		}
+		txt += '</ul>';
 	}
-	reDrevo(iiii);
-	st(6);	display(616);	end();
-	st(5);	display(514);display(515);display(516);	end();
-	st(4);	for(e = 401; e<=408; e++) if(e!==403 && e!==405) display(e);	end();
-	st(3);	for(e = 301; e<=309; e++) display(e);	end();
-	st(2);	for(e = 201; e<=209; e++) display(e);	end();
-	st(1);	for(e = 101; e<=109; e++) display(e);	end();
-	document.getElementById(rrrr).innerHTML = str;
+	document.getElementById(rawr?'rawrRawr':'rawr').innerHTML = txt;
+}
+function reDrevo(e){
+	if(!schet[e])schet[e]=0;
+	if(vychetCopy[e] && vychetCopy[e]>0)vychetCopy[e]--;
+	else {
+		schet[e]++;
+		if(e>200){	reDrevo(i[e][0]); reDrevo(i[e][1]); reDrevo(i[e][2]);	}
+	}
+}
+
+function drevo(e,k){
+	rawr=k;
+	mnoj = 1;
+	schet = [];
+	str='';
+	vychetCopy = vychet.slice();
+	if(rawr){
+		vetka = e;
+		mnoj = mnojInput.value*1;
+		if(vychet[e])mnoj +=vychet[e];
+	}
+	for(z=1;z<=mnoj;z++)reDrevo(e);
+	w();
 }
 
 
-drevo(616,'rawr');
-drevo(515,'rawrRawr');
+drevo(616);
+drevo(515,true);
 </script>
 
 
