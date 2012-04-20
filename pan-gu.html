@@ -29,7 +29,8 @@ body	{	font-size:16px; width:auto; height:auto; font-weight:bold; color:#003; te
 a	{	color:#fff;text-shadow:1px 1px 2px #003; 	}
 a:hover	{	text-shadow:1px 5px 10px #003;	}
 
-.obertka	{	display:table; padding:20px; margin:40px auto 10px; background:#69F; box-shadow: 0 0 20px rgba(0,0,0,0.5);border-radius:40px 250px 40px 40px;	}
+.obertka	{	display:table; padding:20px; margin:40px auto 10px; background:#69F;border-radius:40px 250px 40px 40px;	}
+.obertka, .vybor	{	box-shadow:0 0 20px rgba(0,0,0,0.5);	}
 .drevo 	{	display: table-cell; width:380px; 	}
 .vetv	{	display:table;	}
 .vetv li button	{	display:block; margin:0px auto 2px; width:32px; height:32px; font-style:normal; background:none;  background-image:url(znachki.png); background-position:left top; box-shadow: 0px 0px 20px rgba(0,0,0,0.5); border:none; 	}
@@ -48,10 +49,20 @@ a:hover	{	text-shadow:1px 5px 10px #003;	}
 .podzagolovok button:active, a:active,.podzagolovok input	{	border-color:#003; border-bottom-color:#fff; border-right-color:#fff;	}
 .podzagolovok input	{	background:#fff; color:#003; position:static;	}
 
+#niz	{	font-size:12px;	}
+#strelki	{	font-size:18px;	}
+
 #vychet	{	width:800px; margin:0px auto; visibility:hidden;	}
 #vychet ul	{	display:inline-block;	}
 #vychet>div	{	width:100%;	}
 
+.vybor	{	position:absolute; right:20px; top:40px; background:black; color:white; background:rgba(0,0,0,0.8); padding:10px; border-radius:10px; text-align:right; font-weight:normal;	}
+.vybor button	{	background:none; border:none; color:white; border-radius:4px;	}
+.vybor button:hover	{	text-decoration:underline;	}
+#vybor h4, #vybor ul	{	text-align:left;	}
+#vybor h4	{	padding:2px; padding-left:5px;	}
+#vybor ul	{	width:256px;	}
+#vybor li	{	display:inline-block;	}
 </style>
 <!--
 -->
@@ -79,96 +90,107 @@ a:hover	{	text-shadow:1px 5px 10px #003;	}
 		<div id="rawrRawrRawr" class="vetv"></div>
 	</div>
 </div>
+<div class="vybor">
+	<button onClick="zu = vyborDiv.style.display; vyborDiv.style.display=zu=='none'?'block':'none'" title="Показать/скрыть окно выбора">Выбор трактата</button>
+	<div id="vybor" class="vetv" style="display:none">
+		111
+	
+	</div>
+</div>
 <script>
 
-var vetka;
+var vetka; var derevo;
 var rawr;
 var mnoj = 1;
 var mnojInput = document.getElementById('mnojitel');
 var nazvDiv = document.getElementById('nazvaniye');
 var vychetDiv = document.getElementById('rawrRawrRawr');
 var scryt = document.getElementById('vychet').style;
+var vyborDiv = document.getElementById('vybor');
+
 var schet;
 var str='';
 var i = [];
-var dann = [];
 var vychet = [];
 var vychetCopy = [];
-				i[616] = new Array(516, 515, 514);
-			i[514] = new Array(408, 402, 404);
-			i[515] = new Array(406, 407, 401);
-			i[516] = new Array(406, 407, 401);
-		i[401] = new Array(303, 307, 304);
-		i[402] = new Array(304, 301, 305);
-		i[404] = new Array(306, 307, 301);
-		i[406] = new Array(308, 205, 207);
-		i[407] = new Array(309, 302, 306);
-		i[408] = new Array(301, 304, 302);
-	i[301] = new Array(201, 206, 203);
-	i[302] = new Array(202, 205, 206);
-	i[303] = new Array(207, 203, 202);
-	i[304] = new Array(204, 201, 203);
-	i[305] = new Array(205, 202, 201);
-	i[306] = new Array(206, 203, 201);
-	i[307] = new Array(207, 205, 204);
-	i[308] = new Array(208, 202, 204);
-	i[309] = new Array(209, 203, 202);
-i[201] = new Array(101, 104, 106);
-i[202] = new Array(102, 105, 106);
-i[203] = new Array(107, 103, 102);
-i[204] = new Array(101, 104, 103);
-i[205] = new Array(102, 105, 107);
-i[206] = new Array(106, 101, 103);
-i[207] = new Array(107, 103, 104);
-i[208] = new Array(108, 103, 101);
-i[209] = new Array(109, 103, 107);
-
 //http://www.pwdatabase.com/ru/items/
-					dann[616] = new Array('Бог Пань Гу',	'17683');
-				dann[514] = new Array('Прикосновение малиновых губ',	'17675');
-				dann[515] = new Array('Тринадцать хулиганов',	'17678');
-				dann[516] = new Array('Пустое зеркало',	'17682');
-			dann[401] = new Array('Буддистские чувства',	'17602');
-			dann[402] = new Array('Фатализм',	'17603');
-			dann[403] = new Array('Шипы роз',	'17604');
-			dann[404] = new Array('Беспорядки',	'17605');
-			dann[405] = new Array('Весенний ветер',	'17606');
-			dann[406] = new Array('Юг реки Янцзы',	'17610');
-			dann[407] = new Array('Воды слабости',	'17614');
-			dann[408] = new Array('Ветер тигров - облака драконов',	'17600');
-			dann[409] = new Array('Призыв духов',	'17601');
-		dann[301] = new Array('Наслаждайся жизнью, пока можно',	'17593');
-		dann[302] = new Array('Закат',	'17594');
-		dann[303] = new Array('Злодейство',	'17595');
-		dann[304] = new Array('Широкий путь',	'17596');
-		dann[305] = new Array('Аромат красавицы',	'17597');
-		dann[306] = new Array('Прощальная песнь',	'17598');
-		dann[307] = new Array('Хладнокровный человек',	'17599');
-		dann[308] = new Array('Поражение и распад',	'17609');
-		dann[309] = new Array('Зловоние',	'17613');
-	dann[201] = new Array('Поднимаем 1000 цзюнь',	'17586');
-	dann[202] = new Array('Туманный дождь цветов сливы',	'17587');
-	dann[203] = new Array('Красный лотос',	'17588');
-	dann[204] = new Array('Воин Чи Ю',	'17589');
-	dann[205] = new Array('Створки цветов персика',	'17590');
-	dann[206] = new Array('Под крепостью',	'17591');
-	dann[207] = new Array('Истинный огонь самадхи',	'17592');
-	dann[208] = new Array('Волк убийца',	'17608');
-	dann[209] = new Array('Купающийся в огне феникс',	'17612');
-dann[101] = new Array('Один против целой армии', '17579');
-dann[102] = new Array('Расцвели персиковые деревья',	'17580');
-dann[103] = new Array('Огонь действий',	'17581');
-dann[104] = new Array('Огромный дух',	'17582');
-dann[105] = new Array('Период разрушений',	'17583');
-dann[106] = new Array('Невозможное',	'17584');
-dann[107] = new Array('Смех с цветами в руках',	'17585');
-dann[108] = new Array('Красная река',	'17607');
-dann[109] = new Array('Луна огненных ночей',	'17611');
+//осталось сделать выбор книжки
+i[601] = [501, 502, 509, 17615, 'Холодный иностранец'];
+i[602] = [502, 503, 505, 17622, 'Темный север'];
+i[603] = [504, 503, 508, 17628, 'Алые слезы'];
+i[604] = [503, 508, 501, 17630, 'Вода камень точит'];
+i[605] = [505, 512, 509, 17634, 'Феникс летит к рассвету'];
+i[606] = [505, 506, 507, 17636, 'Растущий в реке камыш'];
+i[607] = [513, 514, 507, 17642, 'Тянущий свирепые волны'];
+i[608] = [508, 506, 514, 17649, 'Огонь ненависти ранит сердце'];
+i[609] = [510, 501, 505, 17655, 'Хвала закону'];
+i[610] = [510, 506, 501, 17657, 'Соцветие'];
+i[611] = [511, 509, 505, 17661, 'Пара крыльев'];
+i[612] = [511, 513, 503, 17663, 'Медитация в положении сидя'];
+i[613] = [513, 507, 514, 17669, 'Вселенская ярость'];
+i[614] = [514, 512, 513, 17676, 'Смех императорской наложницы'];
+i[615] = [515, 501, 507, 17679, 'Восемнадцать учеников'];
+i[616] = [516, 515, 514, 17683, 'Бог Пань Гу'];
+	i[501] = [401, 408, 405, 17618, 'Разум подобен струящейся воде'];
+	i[502] = [409, 405, 403, 17621, 'Цунами']; 
+	i[503] = [404, 408, 401, 17624, 'Истерия'];
+	i[504] = [408, 404, 401, 17627, 'Поздравления земле'];
+	i[505] = [403, 409, 404, 17633, 'Всемирные разрушения'];
+	i[506] = [409, 403, 402, 17639, 'Странная доброта'];
+	i[507] = [402, 404, 409, 17645, 'Красавица змея'];
+	i[508] = [404, 408, 402, 17648, 'Четыре пустоты'];
+	i[509] = [403, 401, 405, 17651, 'Сладкий оазис пустынь'];
+	i[510] = [401, 405, 407, 17654, 'Прелести небес'];
+	i[511] = [403, 409, 404, 17660, 'Купидон'];
+	i[512] = [409, 403, 404, 17666, 'Гигантские волны'];
+	i[513] = [408, 402, 404, 17672, 'Ярость небес'];
+	i[514] = [408, 402, 404, 17675, 'Прикосновение малиновых губ'];
+	i[515] = [406, 407, 401, 17678, 'Тринадцать хулиганов'];
+	i[516] = [406, 407, 401, 17682, 'Пустое зеркало'];
+		i[401] = [303, 307, 304, 17602, 'Буддистские чувства'];
+		i[402] = [304, 301, 305, 17603, 'Фатализм'];
+		i[403] = [302, 305, 303, 17604, 'Шипы роз'];
+		i[404] = [306, 307, 301, 17605, 'Беспорядки'];
+		i[405] = [303, 307, 306, 17606, 'Весенний ветер'];
+		i[406] = [308, 205, 207, 17610, 'Юг реки Янцзы'];
+		i[407] = [309, 302, 306, 17614, 'Воды слабости'];
+		i[408] = [301, 304, 302, 17600, 'Ветер тигров - облака драконов'];
+		i[409] = [302, 305, 303, 17601, 'Призыв духов'];
+			i[301] = [201, 206, 203, 17593, 'Наслаждайся жизнью, пока можно'];
+			i[302] = [202, 205, 206, 17594, 'Закат'];
+			i[303] = [207, 203, 202, 17595, 'Злодейство'];
+			i[304] = [204, 201, 203, 17596, 'Широкий путь'];
+			i[305] = [205, 202, 201, 17597, 'Аромат красавицы'];
+			i[306] = [206, 203, 201, 17598, 'Прощальная песнь'];
+			i[307] = [207, 205, 204, 17599, 'Хладнокровный человек'];
+			i[308] = [208, 202, 204, 17609, 'Поражение и распад'];
+			i[309] = [209, 203, 202, 17613, 'Зловоние'];
+				i[201] = [101, 104, 106, 17586, 'Поднимаем 1000 цзюнь'];
+				i[202] = [102, 105, 106, 17587, 'Туманный дождь цветов сливы'];
+				i[203] = [107, 103, 102, 17588, 'Красный лотос'];
+				i[204] = [101, 104, 103, 17589, 'Воин Чи Ю'];
+				i[205] = [102, 105, 107, 17590, 'Створки цветов персика'];
+				i[206] = [106, 101, 103, 17591, 'Под крепостью'];
+				i[207] = [107, 103, 104, 17592, 'Истинный огонь самадхи'];
+				i[208] = [108, 103, 101, 17608, 'Волк убийца'];
+				i[209] = [109, 103, 107, 17612, 'Купающийся в огне феникс'];
+					i[101] = [11, 12, 0, 17579, 'Один против целой армии'];
+					i[102] = [11, 12, 0, 17580, 'Расцвели персиковые деревья'];
+					i[103] = [11, 12, 0, 17581, 'Огонь действий'];
+					i[104] = [11, 12, 0, 17582, 'Огромный дух'];
+					i[105] = [11, 12, 0, 17583, 'Период разрушений'];
+					i[106] = [11, 12, 0, 17584, 'Невозможное'];
+					i[107] = [11, 12, 0, 17585, 'Смех с цветами в руках'];
+					i[108] = [11, 12, 0, 17607, 'Красная река'];
+					i[109] = [11, 12, 0, 17611, 'Луна огненных ночей'];
+						i[11] = [0, 0, 0, 17810, 'Обрывки небесного трактата'];
+						i[12] = [10, 0, 0, 18185, 'Небесная страница'];
+							i[10] = [0, 0, 0, 24721, 'Идеальный приз'];
 
 
 function nazv(t){
 	iii = t.title*1;
-	txt = '<a href="http://www.pwdatabase.com/ru/items/'+dann[iii][1]+'" target="_blank">'+dann[iii][0]+'</a>';
+	txt = '<a href="http://www.pwdatabase.com/ru/items/'+i[iii][3]+'" target="_blank">'+i[iii][4]+'</a>';
 	nazvDiv.innerHTML = txt;
 }
 function shelk(t){
@@ -178,7 +200,7 @@ function shelk(t){
 }
 function zachest(e,sw){
 	if(!sw) vychet[e] = 0;
-	drevo(616);
+	drevo(derevo);
 	if(e == vetka) mnojInput.value = schet[e];
 	drevo(vetka,true);
 	vychtennoe();
@@ -196,26 +218,71 @@ function okno(e,t){
 
 	
 }
-
+function vychtennoe_html(e){
+	deystv ='onClick="shelk(this)"';
+	if(e==12 || e==11 || e==10) deystv = '';
+	return '<li><span onClick="zachest('+e+');">обратно</span><button style="'+sdvig(e)+'" value="'+vychet[e]+'" title="'+e+'" '+deystv+' onMouseOver="nazv(this);"></button><b>×'+vychet[e]+'</b></li>';
+}
 function vychtennoe(){
 	txt = '';
+	lis = '';
+	if(vychet[11]) lis +=vychtennoe_html(11);
+	if(vychet[12]) lis +=vychtennoe_html(12);
+	if(vychet[10]) lis +=vychtennoe_html(10);
+	if(lis!='') txt += '<ul><li>&nbsp;</li> '+lis+'</ul>';
 	for(r=1;r<=6;r++){
 		lis = '';
 		nach = r*100+1;
 		konec = r*100+16;
 		for(e = nach; e<=konec; e++){
 			if(vychet[e]){
-				lis +='<li><span onClick="zachest('+e+');">обратно</span><button style="'+sdvig(e)+'" value="'+vychet[e]+'" title="'+e+'" onClick="shelk(this)" onMouseOver="nazv(this);"></button><b>×'+vychet[e]+'</b></li>';
+				lis += vychtennoe_html(e);
 			}
 		}
 		if(lis!='') txt += '<ul><li>'+r+'</li> '+lis+'</ul>';
 	}
+	
 	vychetDiv.innerHTML = txt;
 }
+
+function okno_vybora(){
+	txt = '';
+	for(r=6;r>=1;r--){
+		lis = '';
+		nach = r*100+1;
+		konec = r*100+16;
+		for(e = nach; e<=konec; e++){
+			if(i[e]){
+				lis +='<li><button style="'+sdvig(e)+'" title="'+e+'" onClick="drevo(this.title)" onMouseOver="nazv(this);"></button></li>';
+			}
+		}
+		txt += '<h4>'+r+'</h4><ul> '+lis+'</ul>';
+	}
+	vyborDiv.innerHTML = txt;
+}
+okno_vybora();
+
 function sdvig(iii){
+	switch(iii){
+		case 10:
+			return(' background-position:32px -32px');
+		break;
+		case 11:
+			return(' background-position:64px 0px');
+		break;
+		case 12:
+			return(' background-position:32px 0px');
+		break;
+	}
 	ryad = Math.round(iii/100);
 	num = iii - (ryad*100);
 	return(' background-position:-'+(32*(num-1))+'px -'+(32*(ryad-1))+'px');
+}
+
+function w_html(e){
+	deystv ='onClick="shelk(this)"';
+	if(e==12 || e==11 || e==10) deystv = '';
+	return '<li><span onClick="okno('+e+',this);" title="Вычесть уже имеющиеся части трактата">вычесть</span><button style="'+sdvig(e)+'" value="'+schet[e]+'" title="'+e+'" '+deystv+' onMouseOver="nazv(this);"></button><b>×'+schet[e]+'</b></li>';
 }
 
 function w(){
@@ -226,11 +293,20 @@ function w(){
 		txt += '<ul><li>'+r+'</li> ';
 		for(e = nach; e<=konec; e++){
 			if(schet[e]){
-				txt +='<li><span onClick="okno('+e+',this);">вычесть</span><button style="'+sdvig(e)+'" value="'+schet[e]+'" title="'+e+'" onClick="shelk(this)" onMouseOver="nazv(this);"></button><b>×'+schet[e]+'</b></li>';
+				txt +=w_html(e);
 			}
 		}
-		txt += '</ul>';
+		txt += '</ul>';		
 	}
+	
+	txt += '<ul id="niz"><li>&nbsp;</li> ';
+	if(schet[11]) txt +=w_html(11);
+	txt += '<li>&nbsp;</li>';
+	if(schet[12]) txt +=w_html(12);
+	
+	if(schet[10]) txt +='<li id="strelki">→ →</li>'+w_html(10);
+	txt += '</ul>';
+	
 	document.getElementById(rawr?'rawrRawr':'rawr').innerHTML = txt;
 }
 function reDrevo(e){
@@ -252,11 +328,24 @@ function drevo(e,k){
 		vetka = e;
 		mnoj = mnojInput.value*1;
 		if(vychet[e])mnoj +=vychet[e];
-	}
+	} else derevo = e;
 	for(z=1;z<=mnoj;z++)reDrevo(e);
+	znach = 0;
+	for(z=101;z<=109;z++) if(schet[z]) znach += schet[z]*3;
+	for(z=12; z>=10; z--){
+		switch(z){
+			case 10:	schet[10] = schet[12]*80;
+				break;
+			default:	schet[z] = znach;
+				break;
+		}
+		if(vychet[z])schet[z]-= vychet[z]*1;
+		if(schet[z]<0)schet[z] = 0;
+		
+	}
+		
 	w();
 }
-
 
 drevo(616);
 drevo(515,true);
