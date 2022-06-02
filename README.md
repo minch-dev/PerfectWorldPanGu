@@ -1,5 +1,5 @@
 # PerfectWorldPanGu
-- a calculator of crafting resources for Perfect World Tomes. Should be usable today if the version of your server is somewhere around year 2012.
+a calculator of crafting resources for Perfect World Tomes. Should be usable today if the version of your server is somewhere around year 2012.
 
 # Online version
 https://minch-yoda.github.io/PerfectWorldPanGu/
